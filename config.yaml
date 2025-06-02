@@ -1,0 +1,30 @@
+data:
+  train_path: "data/train_10k.jsonl"    # The 3rd position: "data/train_10k.jsonl" or "data/train_100k.jsonl"
+  valid_path: "data/valid.jsonl"
+  test_path: "data/test.jsonl"
+  embedding_path_zh: "data/fasttext.cc.zh.300.vec"
+  embedding_path_en: "data/glove.6B.300d.txt"
+  vocab_path_zh: "outputs/vocab/zh_vocab.pkl"
+  vocab_path_en: "outputs/vocab/en_vocab.pkl"
+  min_freq: 5
+  max_len: 50
+training:
+  batch_size: 128
+  learning_rate: 0.0005
+  epochs: 80
+  teacher_forcing_ratio: 0.8
+  train_type: "mix_training"   # The 2nd position: "teacher_forcing" or "free_running" or "mix_training"
+  seed: 42
+model:
+  embedding_dim: 300
+  hidden_size: 512
+  num_layers: 2
+  dropout: 0.5
+  attention_type: "multiplicative"   # The 1st position: "dot_product" or "multiplicative" or "additive"
+inference:
+  num_visualize: 3
+  model_path: "outputs/models/model_2_3_1.pt"
+  decode_type: "beam_search"   # The 4th position: "greedy" or "beam_search"
+  beam_size: 5
+main:
+  mode: "both"   # "train" or "inference" or "both"

@@ -58,7 +58,7 @@ class Attention(nn.Module):
         elif self.attention_type == 'additive':
             decoder_hidden = decoder_hidden.unsqueeze(1).repeat(1, seq_len, 1)  # (batch_size, seq_len, hidden_size)
             scores = self.v(torch.tanh(self.W1(decoder_hidden) + self.W2(encoder_outputs)))  # (batch_size, seq_len, 1)
-            scores = scores.squeeze(1)
+            scores = scores.squeeze(-1)
 
         # 确保 scores 是 2D
         assert scores.dim() == 2, f"scores must be 2D, got {scores.shape}"
